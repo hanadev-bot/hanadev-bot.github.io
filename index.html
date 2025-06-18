@@ -1,260 +1,101 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" class="bg-zinc-950 text-white">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>하나 - 당신의 다재다능한 디스코드 봇</title>
-    <style>
-        body {
-            font-family: sans-serif;
-            margin: 0;
-            background-color: #191919;
-            color: #e0e0e0;
-            line-height: 1.6;
-        }
-        header {
-            background-color: #272727;
-            padding: 20px;
-            text-align: center;
-            position: fixed;
-            top: -60px; /* 초기 숨김 */
-            left: 0;
-            width: 100%;
-            z-index: 100;
-            transition: top 0.3s ease-in-out;
-        }
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-        }
-        nav ul li {
-            margin: 0 15px;
-        }
-        nav a {
-            color: #f2b3bf;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .hero {
-            text-align: center;
-            padding: 150px 20px 100px; /* 헤더 공간 확보 */
-            opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-        }
-        .hero.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .hero h1 {
-            font-size: 3em;
-            margin-bottom: 20px;
-            color: #f4bec8;
-        }
-        .hero p {
-            font-size: 1.2em;
-            color: #a0a0a0;
-            margin-bottom: 30px;
-        }
-        .hero .invite-button { /* 새로운 버튼 스타일 */
-            display: inline-block;
-            background-color: #f2b3bf;
-            color: #333;
-            padding: 15px 30px;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 1.1em;
-            transition: background-color 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-        .hero .invite-button:hover {
-            background-color: #e8a1ac;
-        }
-        .features {
-            padding: 80px 20px;
-            background-color: #212121;
-        }
-        .features h2 {
-            text-align: center;
-            font-size: 2em;
-            color: #f2b3bf;
-            margin-bottom: 30px;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 0.5s ease-out 0.2s, transform 0.5s ease-out 0.2s;
-        }
-        .features h2.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .feature-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            padding: 0 40px;
-        }
-        .feature {
-            background-color: #2b2b2b;
-            padding: 25px;
-            border-radius: 8px;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 0.5s ease-out 0.4s, transform 0.5s ease-out 0.4s;
-        }
-        .feature.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .feature h3 {
-            color: #f4bec8;
-            margin-top: 0;
-        }
-        .feature p {
-            color: #a0a0a0;
-        }
-        .cta {
-            text-align: center;
-            padding: 100px 20px;
-            background-color: #1e1e1e;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 0.5s ease-out 0.6s, transform 0.5s ease-out 0.6s;
-        }
-        .cta.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .cta h2 {
-            font-size: 2.5em;
-            color: #f4bec8;
-            margin-bottom: 20px;
-        }
-        .cta a { /* 기존 초대 링크 스타일 제거 */
-            /* display: inline-block;
-            background-color: #f2b3bf;
-            color: #333;
-            padding: 15px 30px;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 1.1em;
-            transition: background-color 0.3s ease; */
-            display: none; /* 기존 링크 숨김 */
-        }
-        .cta .invite-button { /* CTA 섹션의 버튼 스타일 */
-            display: inline-block;
-            background-color: #f2b3bf;
-            color: #333;
-            padding: 15px 30px;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 1.1em;
-            transition: background-color 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-        .cta .invite-button:hover {
-            background-color: #e8a1ac;
-        }
-        footer {
-            background-color: #272727;
-            color: #a0a0a0;
-            text-align: center;
-            padding: 20px;
-            font-size: 0.9em;
-            opacity: 0;
-            transition: opacity 0.5s ease-out 0.8s;
-        }
-        footer.show {
-            opacity: 1;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>하나 봇</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      animation: fadeIn 1s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .nav-btn {
+      @apply px-4 py-2 text-sm md:text-base rounded-xl transition;
+    }
+    .nav-active {
+      @apply bg-zinc-800 text-white font-semibold shadow;
+    }
+    .subtab-btn {
+      @apply px-4 py-1.5 rounded-xl bg-zinc-800 text-zinc-300 hover:bg-zinc-700 transition text-sm;
+    }
+    .subtab-active {
+      @apply bg-blue-600 text-white font-medium shadow;
+    }
+  </style>
 </head>
-<body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="#">홈</a></li>
-                <li><a href="#features">기능</a></li>
-                <li><a href="commands.html">명령어</a></li>
-                <li><a href="#cta">초대</a></li>
-            </ul>
-        </nav>
-    </header>
+<body class="font-sans min-h-screen flex flex-col items-center pt-8 px-4">
 
-    <section class="hero">
-        <h1>하나 - 당신의 디스코드 서버를 위한 최고의 동반자</h1>
-        <p>대화, 음악, 그리고 서버 관리기능까지, 하나의 봇으로 모든 것을 경험하세요.</p>
-        <a href="https://discord.com/oauth2/authorize?client_id=1371843214797176872&permissions=285324384&scope=bot%20applications.commands" target="_blank" class="invite-button">하나 봇을 서버에 초대하세요!</a>
-    </section>
+  <!-- 네비게이션 탭 -->
+  <nav class="flex space-x-4 sm:space-x-6 mb-10">
+    <button onclick="switchMainTab('home')" id="homeTab" class="nav-btn nav-active">홈</button>
+    <button onclick="switchMainTab('commands')" id="commandsTab" class="nav-btn">명령어</button>
+  </nav>
 
-    <section id="features" class="features">
-        <h2>주요 기능</h2>
-        <div class="feature-list">
-            <div class="feature">
-                <h3>💬 스마트 대화 기능</h3>
-                <p>자연스러운 대화와 재미있는 상호작용을 지원합니다.</p>
-            </div>
-            <div class="feature">
-                <h3>🎵 음악 재생</h3>
-                <p>끊김 없이 부드러운 음악 재생 기능을 제공합니다.</p>
-            </div>
-            <div class="feature">
-                <h3>⚙️ 효율적인 서버 관리</h3>
-                <p>강력하고 편리한 관리기능을 통해 서버를 손쉽게 운영하세요.</p>
-            </div>
-            <div class="feature">            
-                <h3>🎟티켓 시스템</h3>
-                <p>티켓 시스템을 지원합니다.티켓 시스템으로 서버를 편하게 운영 해보세요!</p>
-            </div>
-        </div>
-    </section>
+  <!-- 홈 페이지 -->
+  <section id="homePage" class="w-full max-w-xl flex flex-col items-center text-center space-y-6">
+    <img
+      src="https://cdn.discordapp.com/attachments/1383452364421468173/1384835817876492308/96cc970b595a62e0eced4917c7154584367f8436a850650785723e1897e9d08e1.jpg?ex=6853e05b&is=68528edb&hm=29300dfcd9091114c97d1a5890885198dd9f9da1cac5c527494d783ae454e57f&"
+      class="w-28 h-28 sm:w-32 sm:h-32 rounded-full border border-white shadow"
+      alt="하나 봇 프로필"
+    />
+    <h1 class="text-3xl font-bold">하나 봇</h1>
+    <p class="text-zinc-400 text-sm sm:text-base leading-relaxed">
+      디스코드에서 유용함과 재미를 동시에 제공하는 올인원 봇.<br class="hidden sm:block"/>
+      다양한 유틸리티와 음악, 관리, 재미 명령어를 지원해요.
+    </p>
+    <a href="https://discord.com/oauth2/authorize?client_id=1383360332742787072" target="_blank"
+       class="mt-2 px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm transition">
+       봇 초대하기
+    </a>
+  </section>
 
-    <section id="cta" class="cta">
-        <h2>지금 바로 하나 봇을 경험하세요!</h2>
-        <p>단 한 번의 클릭으로 당신의 디스코드 서버에 놀라운 변화를 가져다줄 것입니다.</p>
-        <a href="https://discord.com/oauth2/authorize?client_id=1371843214797176872&permissions=285324384&scope=bot%20applications.commands" target="_blank" class="invite-button">서버에 하나 봇 초대하기</a>
-    </section>
+  <!-- 명령어 페이지 -->
+  <section id="commandsPage" class="hidden w-full max-w-2xl mt-4">
+    <!-- 서브탭 -->
+    <div class="flex justify-center flex-wrap gap-2 sm:gap-4 mb-6">
+      <button onclick="switchSubTab('일반')" id="tab-일반" class="subtab-btn subtab-active">일반</button>
+      <button onclick="switchSubTab('노래')" id="tab-노래" class="subtab-btn">노래</button>
+      <button onclick="switchSubTab('관리')" id="tab-관리" class="subtab-btn">관리</button>
+      <button onclick="switchSubTab('재미')" id="tab-재미" class="subtab-btn">재미</button>
+    </div>
 
-    <footer>
-        <p>© 2025 하나 봇. 모든 권리 보유.</p>
-    </footer>
+    <!-- 명령어 내용 -->
+    <div id="commandsContent" class="bg-zinc-900 rounded-xl p-6 text-sm leading-relaxed whitespace-pre-wrap border border-zinc-800 shadow"></div>
+  </section>
 
-    <script>
-        const header = document.querySelector('header');
-        let lastScrollTop = 0;
+  <script>
+    const mainTabs = ['home', 'commands'];
+    const subTabs = {
+      "일반": ["/잼식이", "/하나야", "/핑", "/정보", "/날씨", "/급식", "/시간표", "/백과"],
+      "노래": ["/재생", "/들어가", "/스킵", "/나가", "/일시정지", "/다시시작", "/볼륨", "/셔플", "/반복", "/대기열"],
+      "관리": ["/밴", "/언밴", "/타임아웃", "/킥", "/슬로우모드", "/채널잠금", "/채널해제", "/공지", "/유저정보"],
+      "재미": ["/테트리스", "/강아지", "/고양이", "/시간", "/농사가입", "/낚시"]
+    };
 
-        window.addEventListener('scroll', function() {
-            let scrollTop = window.scrollY || document.documentElement.scrollTop;
-            if (scrollTop > lastScrollTop) {
-                header.style.top = '-60px'; // 아래로 스크롤 시 숨김
-            } else {
-                header.style.top = '0';    // 위로 스크롤 시 나타남
-            }
-            lastScrollTop = scrollTop;
+    function switchMainTab(tab) {
+      mainTabs.forEach(t => {
+        document.getElementById(`${t}Page`).classList.toggle('hidden', t !== tab);
+        document.getElementById(`${t}Tab`).classList.toggle('nav-active', t === tab);
+      });
+      if (tab === 'commands') switchSubTab('일반');
+    }
 
-            // 요소가 화면에 나타날 때 show 클래스 추가
-            const elements = document.querySelectorAll('.hero, .features h2, .feature, .cta, footer');
-            elements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-                if (elementTop < windowHeight * 0.8) { // 화면의 80% 지점에 도달하면 나타남
-                    element.classList.add('show');
-                }
-            });
-        });
+    function switchSubTab(tab) {
+      Object.keys(subTabs).forEach(key => {
+        document.getElementById(`tab-${key}`).classList.toggle('subtab-active', key === tab);
+      });
+      document.getElementById("commandsContent").textContent = subTabs[tab].join('\n');
+    }
 
-        // 페이지 로드 시 첫 번째 섹션 보이게 하기
-        window.addEventListener('load', () => {
-            document.querySelector('.hero').classList.add('show');
-        });
-    </script>
+    document.addEventListener("DOMContentLoaded", () => {
+      switchSubTab('일반');
+    });
+  </script>
+
 </body>
 </html>
-
