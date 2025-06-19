@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko" class="bg-zinc-950 text-white">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta property="og:locale" content="ko_KR" />
+  <meta name="description" content="하나 봇 명령어 페이지" />
+  <title>하나 봇 - 명령어</title>
+  <meta property="og:title" content="하나 봇 명령어" />
+  <meta property="og:description" content="하나 봇의 명령어를 확인하세요." />
+  <meta property="og:image" content="https://cdn.discordapp.com/attachments/1383452364421468173/1385067430363005079/96cc970b595a62e0eced4917c7154584367f8436a850650785723e1897e9d08e1.jpg" />
+  <meta property="og:url" content="https://hana-official.p-e.kr/commands.html" />
+  <meta property="og:type" content="website" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      animation: fadeIn 1s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .nav-btn {
+      @apply px-4 py-2 text-sm md:text-base rounded-xl transition;
+    }
+    .nav-active {
+      @apply bg-zinc-800 text-white font-semibold shadow;
+    }
+    .subtab-btn {
+      @apply px-4 py-1.5 rounded-xl bg-zinc-800 text-zinc-300 hover:bg-zinc-700 transition text-sm;
+    }
+    .subtab-active {
+      @apply bg-blue-600 text-white font-medium shadow;
+    }
+  </style>
+</head>
+<body class="font-sans min-h-screen flex flex-col items-center pt-8 px-4">
+
+  <!-- 네비게이션 탭 -->
+  <nav class="flex space-x-4 sm:space-x-6 mb-10">
+    <a href="index.html" class="nav-btn">홈</a>
+    <a href="commands.html" class="nav-btn nav-active">명령어</a>
+  </nav>
+
+  <!-- 명령어 페이지 -->
+  <section class="w-full max-w-2xl mt-4">
+    <!-- 서브탭 -->
+    <div class="flex justify-center flex-wrap gap-2 sm:gap-4 mb-6">
+      <button onclick="switchSubTab('일반')" id="tab-일반" class="subtab-btn subtab-active">일반</button>
+      <button onclick="switchSubTab('노래')" id="tab-노래" class="subtab-btn">노래</button>
+      <button onclick="switchSubTab('관리')" id="tab-관리" class="subtab-btn">관리</button>
+      <button onclick="switchSubTab('재미')" id="tab-재미" class="subtab-btn">재미</button>
+    </div>
+
+    <!-- 명령어 내용 -->
+    <div id="commandsContent" class="bg-zinc-900 rounded-xl p-6 text-sm leading-relaxed whitespace-pre-wrap border border-zinc-800 shadow"></div>
+  </section>
+
+  <script>
+    const subTabs = {
+      "일반": ["/잼식이", "/하나야", "/핑", "/정보", "/날씨", "/급식", "/시간표", "/백과"],
+      "노래": ["/재생", "/들어가", "/스킵", "/나가", "/일시정지", "/다시시작", "/볼륨", "/셔플", "/반복", "/대기열"],
+      "관리": ["/밴", "/언밴", "/타임아웃", "/킥", "/슬로우모드", "/채널잠금", "/채널해제", "/공지", "/유저정보"],
+      "재미": ["/테트리스", "/강아지", "/고양이", "/시간", "/농사가입", "/낚시"]
+    };
+
+    function switchSubTab(tab) {
+      Object.keys(subTabs).forEach(key => {
+        document.getElementById(`tab-${key}`).classList.toggle('subtab-active', key === tab);
+      });
+      document.getElementById("commandsContent").textContent = subTabs[tab].join('\n');
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      switchSubTab('일반');
+    });
+  </script>
+
+<footer class="mt-10 text-sm text-zinc-500 text-center">
+  <a href="/tos/" class="hover:underline hover:text-white">이용약관</a> | 
+  <a href="/privacy/" class="hover:underline hover:text-white">개인정보처리방침</a> |
+  <a href="https://discord.gg/9aMPBFYE2w" class="hover:underline hover:text-white">서포트서버</a>
+</footer>
+  
+</body>
+</html>
